@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
-import { recipient } from '../config/content';
+import { recipient, getDisplayAge } from '../config/content';
 
 interface TimeElapsed {
   years: number;
@@ -67,7 +67,7 @@ export default function CountersSection() {
           <p className="text-sm text-pink-400 mb-6 font-semibold">{recipient.birthDateLabel}</p>
 
           <div className="grid grid-cols-3 gap-2 md:gap-3" dir="rtl">
-            <CounterBox label="سنة" value={elapsed.years} />
+            <CounterBox label="سنة" value={getDisplayAge()} />
             <CounterBox label="شهر" value={elapsed.months} />
             <CounterBox label="يوم" value={elapsed.days} />
             <CounterBox label="ساعة" value={elapsed.hours} />
