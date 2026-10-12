@@ -17,8 +17,8 @@ export default function MagicSection() {
         <h2 className="text-3xl font-black text-emerald-300 mb-3">{magicContent.title}</h2>
         <p className="text-emerald-400 mb-10 text-lg">{magicContent.hint}</p>
 
-        <button onClick={() => setOpen(true)}
-          className="group relative px-12 py-5 rounded-full font-bold text-2xl text-white transition-all duration-300 hover:scale-110 active:scale-95"
+        <button type="button" onClick={() => setOpen(true)}
+          className="group relative px-12 py-5 rounded-full font-bold text-2xl text-white transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
           style={{ background: 'linear-gradient(135deg, #047857, #059669, #10b981)' }}>
           <span className="flex items-center gap-3">
             <Sparkles size={26} className="group-hover:rotate-12 transition-transform" />
@@ -30,12 +30,15 @@ export default function MagicSection() {
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(16, 185, 129, 0.08)', backdropFilter: 'blur(10px)' }}>
+          onClick={() => setOpen(false)} /* دوس بره البطاقة → تقفل */
+          role="dialog" aria-modal="true"
+          style={{ background: 'rgba(2, 12, 8, 0.65)', backdropFilter: 'blur(10px)' }}>
           <div className="glass-card rounded-3xl p-8 max-w-lg w-full shadow-2xl relative text-right max-h-[85vh] overflow-y-auto custom-scrollbar"
+            onClick={(e) => e.stopPropagation()}
             style={{ boxShadow: '0 30px 70px rgba(16, 185, 129, 0.3)' }}>
 
-            <button onClick={() => setOpen(false)}
-              className="sticky top-0 float-left w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10">
+            <button type="button" onPointerDown={() => setOpen(false)} onClick={() => setOpen(false)}
+              className="sticky top-0 float-left w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10 cursor-pointer">
               <X size={18} className="text-emerald-300" />
             </button>
 
@@ -55,8 +58,8 @@ export default function MagicSection() {
               </p>
             </div>
 
-            <button onClick={() => setOpen(false)}
-              className="mt-6 w-full py-3 rounded-2xl font-bold text-white text-lg transition-all hover:scale-105 active:scale-95"
+            <button type="button" onPointerDown={() => setOpen(false)} onClick={() => setOpen(false)}
+              className="relative z-10 mt-6 w-full py-3 rounded-2xl font-bold text-white text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
               style={{ background: 'linear-gradient(135deg, #047857, #10b981)' }}>
               {magicContent.close}
             </button>

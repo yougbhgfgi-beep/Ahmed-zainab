@@ -28,20 +28,22 @@ export default function CakeSection() {
   }, [showWish]);
 
   const blowCandles = () => {
-    if (blown) return;
-    setBlown(true);
-    const pieces: Confetti[] = Array.from({ length: 60 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      size: 8 + Math.random() * 10,
-      duration: 2 + Math.random() * 2,
-      delay: Math.random() * 0.8,
-      shape: Math.random() > 0.5 ? 'circle' : 'rect',
-    }));
-    setConfetti(pieces);
-    setTimeout(() => setShowWish(true), 800);
-    setTimeout(() => setConfetti([]), 4000);
+    if (!blown) {
+      setBlown(true);
+      const pieces: Confetti[] = Array.from({ length: 60 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        size: 8 + Math.random() * 10,
+        duration: 2 + Math.random() * 2,
+        delay: Math.random() * 0.8,
+        shape: Math.random() > 0.5 ? 'circle' : 'rect',
+      }));
+      setConfetti(pieces);
+      setTimeout(() => setConfetti([]), 4000);
+    }
+    // دوس على التورتة تاني → رسالة التهنئة ترجع تاني
+    setShowWish(true);
   };
 
   useEffect(() => {
@@ -165,12 +167,15 @@ export default function CakeSection() {
       {/* Wish Modal */}
       {showWish && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(16, 185, 129, 0.08)', backdropFilter: 'blur(10px)' }}>
+          onClick={() => setShowWish(false)} /* دوس بره البطاقة → تقفل */
+          role="dialog" aria-modal="true"
+          style={{ background: 'rgba(2, 12, 8, 0.65)', backdropFilter: 'blur(10px)' }}>
           <div className="glass-card rounded-3xl p-8 max-w-md w-full shadow-2xl relative text-center max-h-[85vh] overflow-y-auto custom-scrollbar"
+            onClick={(e) => e.stopPropagation()}
             style={{ boxShadow: '0 30px 70px rgba(16, 185, 129, 0.3)' }}>
 
-            <button onClick={() => setShowWish(false)}
-              className="absolute top-4 left-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+            <button type="button" onPointerDown={() => setShowWish(false)} onClick={() => setShowWish(false)}
+              className="absolute top-4 left-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10 cursor-pointer">
               <X size={18} className="text-emerald-300" />
             </button>
 
@@ -188,8 +193,8 @@ export default function CakeSection() {
                 <span key={i}>{e}</span>
               ))}
             </div>
-            <button onClick={() => setShowWish(false)}
-              className="mt-6 w-full py-3 rounded-2xl font-bold text-white text-lg transition-all hover:scale-105 active:scale-95"
+            <button type="button" onPointerDown={() => setShowWish(false)} onClick={() => setShowWish(false)}
+              className="relative z-10 mt-6 w-full py-3 rounded-2xl font-bold text-white text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
               style={{ background: 'linear-gradient(135deg, #047857, #10b981)' }}>
               {cakeContent.close}
             </button>
