@@ -41,13 +41,13 @@ export default function LoginPage({ onLogin, onStartTyping }: Props) {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #ffe4f0 0%, #fff0f5 40%, #ffd6e8 100%)' }}>
+      style={{ background: 'linear-gradient(135deg, #04120a 0%, #0a2416 45%, #020d07 100%)' }}>
 
       {/* Decorative circles */}
-      <div className="absolute top-0 left-0 w-72 h-72 rounded-full opacity-20 blur-3xl"
-        style={{ background: 'radial-gradient(circle, #ff69b4, transparent)' }} />
+      <div className="absolute top-0 left-0 w-72 h-72 rounded-full opacity-25 blur-3xl"
+        style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.6), transparent)' }} />
       <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
-        style={{ background: 'radial-gradient(circle, #ff1493, transparent)' }} />
+        style={{ background: 'radial-gradient(circle, rgba(245, 176, 65, 0.28), transparent)' }} />
 
       {/* Stars */}
       {[...Array(8)].map((_, i) => (
@@ -60,7 +60,7 @@ export default function LoginPage({ onLogin, onStartTyping }: Props) {
       ))}
 
       <div className={`glass-card rounded-3xl p-10 w-full max-w-md mx-4 shadow-2xl text-center animate-fade-in-scale relative z-10 ${shaking ? 'animate-[wiggle_0.3s_ease-in-out_2]' : ''}`}
-        style={{ boxShadow: '0 25px 60px rgba(255, 105, 180, 0.25)' }}>
+        style={{ boxShadow: '0 25px 60px rgba(16, 185, 129, 0.25)' }}>
 
         {/* Top decoration */}
         <div className="flex justify-center mb-6 gap-2">
@@ -72,7 +72,7 @@ export default function LoginPage({ onLogin, onStartTyping }: Props) {
         {/* Avatar */}
         <div className="flex justify-center mb-5">
           <div className="relative w-24 h-24 rounded-full flex items-center justify-center overflow-hidden"
-            style={{ border: '3px solid #fff', boxShadow: '0 0 30px rgba(255,105,180,0.5)' }}>
+            style={{ border: '3px solid #34d399', boxShadow: '0 0 30px rgba(16, 185, 129, 0.5)' }}>
             <img src={avatarSrc} alt={sender.name}
               className="w-full h-full object-cover" />
             <span className="absolute -top-1 -right-1 text-lg">🎂</span>
@@ -92,7 +92,7 @@ export default function LoginPage({ onLogin, onStartTyping }: Props) {
               value={password}
               onChange={(e) => handleChange(e.target.value)}
               placeholder={loginContent.placeholder}
-              className="pink-input w-full px-5 py-4 rounded-2xl border-2 border-pink-200 bg-white/70 text-center text-pink-700 text-lg font-semibold placeholder-pink-300 transition-all"
+              className="pink-input w-full px-5 py-4 rounded-2xl border-2 border-emerald-300/40 bg-white/5 text-center text-emerald-200 text-lg font-semibold placeholder-emerald-400/40 transition-all"
               style={{ direction: 'rtl', letterSpacing: '0.15em' }}
             />
           </div>
@@ -105,7 +105,7 @@ export default function LoginPage({ onLogin, onStartTyping }: Props) {
 
           <button type="submit" disabled={loading}
             className="w-full py-4 rounded-2xl font-bold text-xl text-white transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{ background: 'linear-gradient(135deg, #ff69b4, #ff1493)' }}>
+            style={{ background: 'linear-gradient(135deg, #047857, #10b981)' }}>
             {loading ? (
               <span className="flex items-center justify-center gap-2">
                 <Sparkles size={20} className="animate-spin" />

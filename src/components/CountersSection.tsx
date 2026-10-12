@@ -77,9 +77,9 @@ export default function CountersSection() {
     value: number;
     children?: React.ReactNode;
   }) => (
-    <div className="flex flex-col items-center p-2 md:p-3 bg-white/40 rounded-xl shadow-[inset_0_2px_10px_rgba(255,105,180,0.1)] border border-pink-200/50 hover:bg-white/60 transition-colors">
-      <span className="text-2xl md:text-3xl font-black text-pink-600 font-mono tracking-tight">{value}</span>
-      <span className="text-[10px] md:text-sm font-bold text-pink-400 mt-1">{label}</span>
+    <div className="flex flex-col items-center p-2 md:p-3 bg-white/5 rounded-xl shadow-[inset_0_2px_10px_rgba(16,185,129,0.12)] border border-emerald-300/40 hover:bg-white/10 transition-colors">
+      <span className="text-2xl md:text-3xl font-black text-emerald-300 font-mono tracking-tight">{value}</span>
+      <span className="text-[10px] md:text-sm font-bold text-emerald-400 mt-1">{label}</span>
       {children}
     </div>
   );
@@ -87,21 +87,21 @@ export default function CountersSection() {
   return (
     <section className="relative z-10 py-16 px-4">
       <div className="max-w-xl mx-auto">
-        <div className="glass-card rounded-3xl p-6 md:p-8 shadow-xl text-center relative overflow-hidden group border-2 border-white/50 hover:border-pink-300 transition-colors">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-pink-200/20 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none" />
+        <div className="glass-card rounded-3xl p-6 md:p-8 shadow-xl text-center relative overflow-hidden group border-2 border-emerald-300/25 hover:border-emerald-300 transition-colors">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-400/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none" />
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center shadow-lg text-white group-hover:scale-110 transition-transform">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg text-white group-hover:scale-110 transition-transform">
               <Clock size={24} />
             </div>
           </div>
-          <h3 className="text-xl md:text-2xl font-black text-pink-600 mb-2">منذ أن نوّرت الدنيا ✨</h3>
-          <p className="text-sm text-pink-400 mb-6 font-semibold">{recipient.birthDateLabel}</p>
+          <h3 className="text-xl md:text-2xl font-black text-emerald-200 mb-2">منذ أن نوّرت الدنيا ✨</h3>
+          <p className="text-sm text-emerald-400 mb-6 font-semibold">{recipient.birthDateLabel}</p>
 
           <div className="grid grid-cols-3 gap-2 md:gap-3" dir="rtl">
             <CounterBox label="سنة" value={countingTo25 ? elapsed.years : getDisplayAge()}>
               {countingTo25 && (
                 <span className="mt-1.5 text-[9px] md:text-[11px] font-bold text-white whitespace-nowrap rounded-full px-2 py-0.5 animate-pulse"
-                  style={{ background: 'linear-gradient(135deg, #ff69b4, #ff1493)' }}>
+                  style={{ background: 'linear-gradient(135deg, #047857, #10b981)' }}>
                   ⏳ حتى 25: {until.days > 0 ? `${until.days} يوم ` : ''}{pad(until.hours)}:{pad(until.minutes)}:{pad(until.seconds)}
                 </span>
               )}

@@ -44,7 +44,7 @@ export default function HeroSection() {
       {/* Floating badge */}
       <div className="glass-card rounded-full px-8 py-4 shadow-lg animate-fade-in-up"
         style={{ animationDelay: '0.3s' }}>
-        <p className="text-pink-600 font-bold text-lg">
+        <p className="text-emerald-300 font-bold text-lg">
           ⭐ {age} سنة من التألق والنجاح ⭐
         </p>
       </div>

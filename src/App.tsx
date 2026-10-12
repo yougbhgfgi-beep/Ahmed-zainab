@@ -101,15 +101,15 @@ export default function App() {
 
   const Divider = ({ emoji }: { emoji: string }) => (
     <div className="flex items-center justify-center gap-4 px-4">
-      <div className="h-px flex-1 max-w-xs bg-gradient-to-r from-transparent to-pink-200" />
+      <div className="h-px flex-1 max-w-xs bg-gradient-to-r from-transparent to-emerald-300" />
       <span className="text-2xl">{emoji}</span>
-      <div className="h-px flex-1 max-w-xs bg-gradient-to-l from-transparent to-pink-200" />
+      <div className="h-px flex-1 max-w-xs bg-gradient-to-l from-transparent to-emerald-300" />
     </div>
   );
 
   return (
     <div className="relative min-h-[100dvh] overflow-x-hidden"
-      style={{ background: 'linear-gradient(180deg, #fff0f5 0%, #ffe4f0 30%, #fff0f5 60%, #ffd6e8 100%)' }}>
+      style={{ background: 'linear-gradient(180deg, #04120a 0%, #0a2416 30%, #071b10 60%, #030f09 100%)' }}>
 
       {/* 🎵 الأغنية */}
       <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" />
@@ -118,7 +118,7 @@ export default function App() {
       <div className="fixed top-6 left-6 z-[60]">
         <button onClick={toggleMusic} aria-label="تشغيل/إيقاف الأغنية"
           className="relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-90"
-          style={{ background: 'linear-gradient(135deg, #ff69b4, #ff1493)' }}>
+          style={{ background: 'linear-gradient(135deg, #047857, #10b981)' }}>
           {musicOn ? <Volume2 size={22} className="text-white" /> : <VolumeX size={22} className="text-white" />}
         </button>
       </div>
@@ -128,7 +128,7 @@ export default function App() {
       ) : (
         <>
           {/* Chic Fixed Border */}
-          <div className="fixed inset-2 md:inset-4 border-[3px] md:border-[6px] border-pink-400/30 rounded-2xl md:rounded-3xl pointer-events-none z-50 shadow-[inset_0_0_20px_rgba(255,105,180,0.15)]" />
+          <div className="fixed inset-2 md:inset-4 border-[3px] md:border-[6px] border-emerald-400/20 rounded-2xl md:rounded-3xl pointer-events-none z-50 shadow-[inset_0_0_20px_rgba(16,185,129,0.12)]" />
 
           <FloatingBackground />
 

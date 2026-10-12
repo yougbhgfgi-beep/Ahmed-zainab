@@ -12,7 +12,7 @@ interface Confetti {
   shape: string;
 }
 
-const COLORS = ['#ff69b4', '#ff1493', '#ffd700', '#ff6eb4', '#ffb6c1', '#ff85a1', '#ffc0cb'];
+const COLORS = ['#34d399', '#10b981', '#ffd700', '#ffb84d', '#6ee7b7', '#f0c44f', '#059669'];
 
 export default function CakeSection() {
   const [blown, setBlown] = useState(false);
@@ -65,7 +65,7 @@ export default function CakeSection() {
       <div className="w-0.5 h-2 bg-gray-700 -mb-1 z-0" />
       {/* Number Shape */}
       <div className="text-6xl font-black relative" style={{
-        color: '#ff69b4',
+        color: '#34d399',
         WebkitTextStroke: '2px white',
         filter: 'drop-shadow(2px 4px 4px rgba(0,0,0,0.2))'
       }}>
@@ -94,8 +94,8 @@ export default function CakeSection() {
       </div>
 
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl font-black text-pink-600 mb-2">{cakeContent.title}</h2>
-        <p className="text-pink-400 mb-10">
+        <h2 className="text-3xl font-black text-emerald-300 mb-2">{cakeContent.title}</h2>
+        <p className="text-emerald-400 mb-10">
           {blown ? cakeContent.afterBlow : cakeContent.beforeBlow}
         </p>
 
@@ -110,7 +110,7 @@ export default function CakeSection() {
 
           {/* Top tier */}
           <div className="relative w-52 h-16 rounded-t-full shadow-lg overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, #ff69b4, #ff85a1)' }}>
+            style={{ background: 'linear-gradient(135deg, #059669, #34d399)' }}>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-white font-bold text-sm">⭐ Happy Birthday ⭐</span>
             </div>
@@ -118,7 +118,7 @@ export default function CakeSection() {
 
           {/* Middle tier */}
           <div className="relative w-72 h-20 shadow-lg overflow-hidden -mt-1"
-            style={{ background: 'linear-gradient(135deg, #ffc0cb, #ffb6c1)' }}>
+            style={{ background: 'linear-gradient(135deg, #10b981, #34d399)' }}>
             <div className="absolute inset-0 flex items-center justify-center gap-3">
               {['❤️', '⭐', '❤️', '⭐', '❤️'].map((e, i) => (
                 <span key={i} className="text-lg">{e}</span>
@@ -131,14 +131,14 @@ export default function CakeSection() {
                   left: `${8 + i * 12}%`,
                   width: 14,
                   height: 10 + Math.random() * 12,
-                  background: '#ff69b4',
+                  background: '#10b981',
                 }} />
             ))}
           </div>
 
           {/* Bottom tier */}
           <div className="relative w-80 h-24 rounded-b-3xl shadow-xl overflow-hidden -mt-1"
-            style={{ background: 'linear-gradient(135deg, #ff85a1, #ff69b4)' }}>
+            style={{ background: 'linear-gradient(135deg, #047857, #059669)' }}>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-white font-bold text-xl">{cakeContent.cakeName}</span>
             </div>
@@ -152,11 +152,11 @@ export default function CakeSection() {
 
           {/* Plate */}
           <div className="w-96 h-4 rounded-full -mt-1 shadow-lg"
-            style={{ background: 'linear-gradient(135deg, #ffd6e8, #ffc0cb)' }} />
+            style={{ background: 'linear-gradient(135deg, #022c22, #064e3b)' }} />
         </div>
 
         {!blown && (
-          <p className="mt-6 text-pink-400 text-sm">
+          <p className="mt-6 text-emerald-400 text-sm">
             دوس على التورتة عشان تنطفّ الشمع! ✨
           </p>
         )}
@@ -165,20 +165,20 @@ export default function CakeSection() {
       {/* Wish Modal */}
       {showWish && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(255, 20, 147, 0.1)', backdropFilter: 'blur(10px)' }}>
+          style={{ background: 'rgba(16, 185, 129, 0.08)', backdropFilter: 'blur(10px)' }}>
           <div className="glass-card rounded-3xl p-8 max-w-md w-full shadow-2xl relative text-center max-h-[85vh] overflow-y-auto custom-scrollbar"
-            style={{ boxShadow: '0 30px 70px rgba(255, 105, 180, 0.35)' }}>
+            style={{ boxShadow: '0 30px 70px rgba(16, 185, 129, 0.3)' }}>
 
             <button onClick={() => setShowWish(false)}
-              className="absolute top-4 left-4 w-9 h-9 rounded-full bg-pink-100 hover:bg-pink-200 flex items-center justify-center transition-colors">
-              <X size={18} className="text-pink-500" />
+              className="absolute top-4 left-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+              <X size={18} className="text-emerald-300" />
             </button>
 
             <div className="text-6xl mb-4">🎊</div>
             <h3 className="text-3xl font-black shimmer-text mb-4">
               {cakeContent.wishTitle}
             </h3>
-            <div className="space-y-3 text-pink-700 leading-relaxed text-lg text-right">
+            <div className="space-y-3 text-emerald-200 leading-relaxed text-lg text-right">
               {cakeContent.wishParagraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
@@ -190,7 +190,7 @@ export default function CakeSection() {
             </div>
             <button onClick={() => setShowWish(false)}
               className="mt-6 w-full py-3 rounded-2xl font-bold text-white text-lg transition-all hover:scale-105 active:scale-95"
-              style={{ background: 'linear-gradient(135deg, #ff69b4, #ff1493)' }}>
+              style={{ background: 'linear-gradient(135deg, #047857, #10b981)' }}>
               {cakeContent.close}
             </button>
           </div>

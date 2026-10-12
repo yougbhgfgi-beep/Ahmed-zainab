@@ -15,18 +15,18 @@ export default function GallerySection() {
     <section className="relative z-10 py-20 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <h2 className="text-3xl font-black text-pink-600 mb-3">{galleryContent.title}</h2>
-          <p className="text-pink-400 text-lg">{galleryContent.subtitle}</p>
+          <h2 className="text-3xl font-black text-emerald-300 mb-3">{galleryContent.title}</h2>
+          <p className="text-emerald-400 text-lg">{galleryContent.subtitle}</p>
           <div className="flex items-center justify-center gap-3 mt-5">
-            <div className="h-px w-20 bg-gradient-to-r from-transparent to-pink-300" />
-            <span className="text-pink-400 text-xl">📷</span>
-            <div className="h-px w-20 bg-gradient-to-l from-transparent to-pink-300" />
+            <div className="h-px w-20 bg-gradient-to-r from-transparent to-emerald-300" />
+            <span className="text-emerald-400 text-xl">📷</span>
+            <div className="h-px w-20 bg-gradient-to-l from-transparent to-emerald-300" />
           </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {galleryImages.map((src, i) => (
-            <div key={i} className="gallery-item rounded-3xl overflow-hidden shadow-xl cursor-pointer relative group border-4 border-white aspect-square"
+            <div key={i} className="gallery-item rounded-3xl overflow-hidden shadow-xl cursor-pointer relative group border-4 border-emerald-300/30 aspect-square"
               onClick={() => setSelected(src)}>
               <img src={src} alt={`ذكرى ${i + 1}`}
                 className="w-full h-full object-cover" />
@@ -44,10 +44,10 @@ export default function GallerySection() {
           onClick={() => setSelected(null)}>
           <div className="relative max-w-2xl w-full" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setSelected(null)}
-              className="absolute -top-5 -right-5 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-2xl z-10 hover:bg-pink-50 transition-colors">
-              <X size={24} className="text-pink-500" />
+              className="absolute -top-5 -right-5 w-12 h-12 rounded-full bg-white/10 border border-emerald-300/30 flex items-center justify-center shadow-2xl z-10 hover:bg-white/20 transition-colors">
+              <X size={24} className="text-emerald-300" />
             </button>
-            <img src={selected} alt="صورة" className="w-full rounded-3xl shadow-[0_0_40px_rgba(255,105,180,0.4)] object-contain max-h-[80vh] bg-black/20" />
+            <img src={selected} alt="صورة" className="w-full rounded-3xl shadow-[0_0_40px_rgba(16,185,129,0.35)] object-contain max-h-[80vh] bg-black/20" />
           </div>
         </div>
       )}
