@@ -50,22 +50,20 @@ export default function App() {
     playMusic();
   }, [playMusic]);
 
-  // 🎬 لما الفيديو يشتغل → وقّف الأغنية. ولما يتوقف/يخلص → كمّلها زي ما كانت
+  // 🎬 أثناء الفيديو → الأغنية بتكمل بصمت (كتم)، ولما يتوقف/يخلص → الصوت يرجع تلقائيًا من نفس المكان
   useEffect(() => {
     const onVideoStart = () => {
       const audio = audioRef.current;
       if (!audio) return;
-      // سجّل إن الأغنية كانت شغالة عشان نرجّعها بعدين
+      // سجّل إن الأغنية كانت شغالة عشان نرجّع صوتها بعدين
       audio.dataset.wasPlaying = audio.paused ? '0' : '1';
-      if (!audio.paused) audio.pause();
+      if (!audio.paused) audio.volume = 0;
     };
     const onVideoStop = () => {
       const audio = audioRef.current;
       if (!audio) return;
-      if (audio.dataset.wasPlaying === '1') {
-        audio.play().then(() => setMusicOn(true)).catch(() => {});
-        audio.dataset.wasPlaying = '0';
-      }
+      if (audio.dataset.wasPlaying === '1') audio.volume = 1;
+      audio.dataset.wasPlaying = '0';
     };
     window.addEventListener('birthday-video-start', onVideoStart);
     window.addEventListener('birthday-video-stop', onVideoStop);

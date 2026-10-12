@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { videoContent } from '../config/content';
 
 export default function VideoSection() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [aspect, setAspect] = useState<string | null>(null);
 
   // 🎬 بلّغ الأغنية إن الفيديو اشتغل/وقف
   useEffect(() => {
@@ -38,15 +39,20 @@ export default function VideoSection() {
 
         <div className="glass-card rounded-3xl overflow-hidden shadow-2xl"
           style={{ boxShadow: '0 25px 60px rgba(255, 105, 180, 0.2)' }}>
-          <div className="relative" style={{ paddingBottom: '56.25%' }}>
+          <div className="relative w-full bg-black"
+            style={{ aspectRatio: aspect ?? '16 / 9', maxHeight: '75vh' }}>
             <video
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
               src={videoContent.src}
               controls
               playsInline
               preload="metadata"
               title="Birthday Video"
+              onLoadedMetadata={(e) => {
+                const v = e.currentTarget;
+                if (v.videoWidth && v.videoHeight) setAspect(`${v.videoWidth} / ${v.videoHeight}`);
+              }}
             />
           </div>
           <div className="p-6 text-center">
