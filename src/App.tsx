@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import FloatingBackground from './components/FloatingBackground';
 import LoginPage from './components/LoginPage';
@@ -49,6 +49,31 @@ export default function App() {
     setStage('main');
     playMusic();
   }, [playMusic]);
+
+  // 🎬 لما الفيديو يشتغل → وقّف الأغنية. ولما يتوقف/يخلص → كمّلها زي ما كانت
+  useEffect(() => {
+    const onVideoStart = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      // سجّل إن الأغنية كانت شغالة عشان نرجّعها بعدين
+      audio.dataset.wasPlaying = audio.paused ? '0' : '1';
+      if (!audio.paused) audio.pause();
+    };
+    const onVideoStop = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      if (audio.dataset.wasPlaying === '1') {
+        audio.play().then(() => setMusicOn(true)).catch(() => {});
+        audio.dataset.wasPlaying = '0';
+      }
+    };
+    window.addEventListener('birthday-video-start', onVideoStart);
+    window.addEventListener('birthday-video-stop', onVideoStop);
+    return () => {
+      window.removeEventListener('birthday-video-start', onVideoStart);
+      window.removeEventListener('birthday-video-stop', onVideoStop);
+    };
+  }, []);
 
   const Divider = ({ emoji }: { emoji: string }) => (
     <div className="flex items-center justify-center gap-4 px-4">

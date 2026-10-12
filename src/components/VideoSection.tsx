@@ -1,6 +1,28 @@
+import { useEffect, useRef } from 'react';
 import { videoContent } from '../config/content';
 
 export default function VideoSection() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // 🎬 بلّغ الأغنية إن الفيديو اشتغل/وقف
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleStart = () => window.dispatchEvent(new Event('birthday-video-start'));
+    const handleStop = () => window.dispatchEvent(new Event('birthday-video-stop'));
+
+    video.addEventListener('play', handleStart);
+    video.addEventListener('pause', handleStop);
+    video.addEventListener('ended', handleStop);
+
+    return () => {
+      video.removeEventListener('play', handleStart);
+      video.removeEventListener('pause', handleStop);
+      video.removeEventListener('ended', handleStop);
+    };
+  }, []);
+
   return (
     <section className="relative z-10 py-20 px-4">
       <div className="max-w-3xl mx-auto">
@@ -18,6 +40,7 @@ export default function VideoSection() {
           style={{ boxShadow: '0 25px 60px rgba(255, 105, 180, 0.2)' }}>
           <div className="relative" style={{ paddingBottom: '56.25%' }}>
             <video
+              ref={videoRef}
               className="absolute inset-0 w-full h-full object-cover"
               src={videoContent.src}
               controls

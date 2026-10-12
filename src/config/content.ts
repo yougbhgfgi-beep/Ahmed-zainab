@@ -27,6 +27,8 @@ export const recipient = {
   nickname: 'بيسو',
   /** تاريخ الميلاد — بالشكل: سنة-شهر-يوم (YYYY-MM-DD) */
   birthDate: '2001-10-13',
+  /** العمر اللي يظهر في الموقع. لو سيبتها فاضية (احذف السطر) هيتحسب تلقائيًا من التاريخ */
+  age: 25,
   /** نفس التاريخ مكتوب بالعربي عشان يظهر في الموقع */
   birthDateLabel: '13 أكتوبر 2001',
   /** التاريخ اللي فوق في المقدمة */
@@ -65,6 +67,11 @@ export function getAge(birthDate: string, at: Date = new Date()): number {
   const m = at.getMonth() - b.getMonth();
   if (m < 0 || (m === 0 && at.getDate() < b.getDate())) age--;
   return age;
+}
+
+/** العمر اللي يظهر في الموقع: لو محدد في الإعدادات ياخده، وإلا يحسبه من التاريخ */
+export function getDisplayAge(): number {
+  return recipient.age ?? getAge(recipient.birthDate);
 }
 
 /* -----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { cakeContent, recipient, getAge } from '../config/content';
+import { cakeContent, getDisplayAge } from '../config/content';
 
 interface Confetti {
   id: number;
@@ -19,7 +19,7 @@ export default function CakeSection() {
   const [confetti, setConfetti] = useState<Confetti[]>([]);
   const [showWish, setShowWish] = useState(false);
 
-  const ageDigits = String(getAge(recipient.birthDate)).split('');
+  const ageDigits = String(getDisplayAge()).split('');
 
   useEffect(() => {
     if (showWish) document.body.style.overflow = 'hidden';

@@ -1,8 +1,8 @@
 import { Heart, Star } from 'lucide-react';
-import { heroContent, recipient, getAge } from '../config/content';
+import { heroContent, recipient, sender, getDisplayAge } from '../config/content';
 
 export default function HeroSection() {
-  const age = getAge(recipient.birthDate);
+  const age = getDisplayAge();
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative z-10 text-center px-4 pt-16">
@@ -21,7 +21,7 @@ export default function HeroSection() {
         </p>
         <h1 className="font-black leading-tight shimmer-text"
           style={{ fontSize: 'clamp(3.2rem, 9vw, 6.5rem)' }}>
-          {recipient.name} ⭐ {recipient.nameLatin}
+          {recipient.name} ⭐ {sender.name}
         </h1>
         <p className="text-2xl font-bold text-pink-500 mt-3 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           {heroContent.birthdayLabel}
