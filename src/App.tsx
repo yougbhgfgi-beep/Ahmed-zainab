@@ -3,6 +3,7 @@ import { Volume2, VolumeX } from 'lucide-react';
 import FloatingBackground from './components/FloatingBackground';
 import LoginPage from './components/LoginPage';
 import EnvelopeModal from './components/EnvelopeModal';
+import WishScreen from './components/WishScreen';
 import HeroSection from './components/HeroSection';
 import CountersSection from './components/CountersSection';
 import MagicSection from './components/MagicSection';
@@ -12,7 +13,7 @@ import GallerySection from './components/GallerySection';
 import VideoSection from './components/VideoSection';
 import OutroSection from './components/OutroSection';
 
-type Stage = 'login' | 'envelope' | 'main';
+type Stage = 'login' | 'wish' | 'envelope' | 'main';
 
 /** 🎵 الأغنية الوحيدة في الموقع — حطّها في public/music.mp3 */
 const MUSIC_SRC = './music.mp3';
@@ -41,7 +42,7 @@ export default function App() {
   }, [playMusic]);
 
   const handleLogin = useCallback(() => {
-    setStage('envelope');
+    setStage('wish');
     playMusic();
   }, [playMusic]);
 
@@ -49,6 +50,11 @@ export default function App() {
     setStage('main');
     playMusic();
   }, [playMusic]);
+
+  // بعد لحظة الأمنية → الرسالة
+  const handleGoToEnvelope = useCallback(() => {
+    setStage('envelope');
+  }, []);
 
   // 🎬 أثناء الفيديو → الأغنية بتكمل بصمت (كتم)، ولما يتوقف/يخلص → ترجع تلقائيًا
   // بتغطي كل الحالات: لو المتصفح كمّلها بصمت بنرجّع صوتها، ولو أوقفها خالص بنشغّلها تاني
@@ -131,6 +137,10 @@ export default function App() {
           <div className="fixed inset-2 md:inset-4 border-[3px] md:border-[6px] border-emerald-400/20 rounded-2xl md:rounded-3xl pointer-events-none z-50 shadow-[inset_0_0_20px_rgba(16,185,129,0.12)]" />
 
           <FloatingBackground />
+
+          {stage === 'wish' && (
+            <WishScreen onNext={handleGoToEnvelope} />
+          )}
 
           {stage === 'envelope' && (
             <EnvelopeModal onClose={handleCloseEnvelope} />
