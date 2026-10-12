@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { Heart, Sparkles, Cake } from 'lucide-react';
-import { loginContent, passwords, sender } from '../config/content';
+import { Heart, Sparkles } from 'lucide-react';
+import { loginContent, passwords, sender, avatarSrc } from '../config/content';
 
 interface Props {
   onLogin: () => void;
@@ -72,8 +72,9 @@ export default function LoginPage({ onLogin, onStartTyping }: Props) {
         {/* Avatar */}
         <div className="flex justify-center mb-5">
           <div className="relative w-24 h-24 rounded-full flex items-center justify-center overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, #ff69b4, #ff1493)', boxShadow: '0 0 30px rgba(255,105,180,0.5)' }}>
-            <Cake size={44} className="text-white" />
+            style={{ border: '3px solid #fff', boxShadow: '0 0 30px rgba(255,105,180,0.5)' }}>
+            <img src={avatarSrc} alt={sender.name}
+              className="w-full h-full object-cover" />
             <span className="absolute -top-1 -right-1 text-lg">🎂</span>
             <span className="absolute -bottom-1 -left-1 text-sm">✨</span>
           </div>

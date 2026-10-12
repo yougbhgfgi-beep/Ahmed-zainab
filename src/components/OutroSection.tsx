@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Heart, Sparkles, ArrowRight, Cake } from 'lucide-react';
-import { outroContent, recipient } from '../config/content';
+import { Heart, Sparkles, ArrowRight } from 'lucide-react';
+import { outroContent, recipient, avatarSrc } from '../config/content';
 
 export default function OutroSection() {
   const [playing, setPlaying] = useState(false);
@@ -100,9 +100,8 @@ export default function OutroSection() {
               /* Final Scene Card */
               <div className="glass-card rounded-3xl p-8 max-w-md w-full shadow-[0_0_50px_rgba(255,20,147,0.3)] animate-fade-in-scale text-center relative border border-pink-500/30 bg-black/40 backdrop-blur-md mt-10">
 
-                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full border-4 border-pink-400 overflow-hidden shadow-[0_0_40px_rgba(255,105,180,0.6)] z-20 flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #ff69b4, #ff1493)' }}>
-                  <Cake size={56} className="text-white" />
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full border-4 border-pink-400 overflow-hidden shadow-[0_0_40px_rgba(255,105,180,0.6)] z-20 flex items-center justify-center bg-white">
+                  <img src={avatarSrc} alt={recipient.name} className="w-full h-full object-cover" />
                 </div>
 
                 <div className="mt-16 mb-8">
