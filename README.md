@@ -68,7 +68,7 @@ npm run deploy    # يطلّعه على GitHub Pages تلقائيًا
 لينك الموقع بعد الرفع:
 
 ```
-https://yougbhgfgi-beep.github.io/ahmed-birthday/
+https://yougbhgfgi-beep.github.io/Ahmed-zainab/
 ```
 
 ---
