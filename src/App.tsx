@@ -50,21 +50,47 @@ export default function App() {
     playMusic();
   }, [playMusic]);
 
-  // 🎬 أثناء الفيديو → الأغنية بتكمل بصمت (كتم)، ولما يتوقف/يخلص → الصوت يرجع تلقائيًا من نفس المكان
+  // 🎬 أثناء الفيديو → الأغنية بتكمل بصمت (كتم)، ولما يتوقف/يخلص → ترجع تلقائيًا
+  // بتغطي كل الحالات: لو المتصفح كمّلها بصمت بنرجّع صوتها، ولو أوقفها خالص بنشغّلها تاني
   useEffect(() => {
     const onVideoStart = () => {
       const audio = audioRef.current;
       if (!audio) return;
-      // سجّل إن الأغنية كانت شغالة عشان نرجّع صوتها بعدين
+      // سجّل إن الأغنية كانت شغالة عشان نرجّعها بعدين
       audio.dataset.wasPlaying = audio.paused ? '0' : '1';
       if (!audio.paused) audio.volume = 0;
     };
-    const onVideoStop = () => {
+
+    let resumeAttempts = 0;
+    const resumeMusic = () => {
       const audio = audioRef.current;
       if (!audio) return;
-      if (audio.dataset.wasPlaying === '1') audio.volume = 1;
+      if (audio.dataset.wasPlaying !== '1') return; // كانت مطفية من قبل — منشغلهاش غصب
       audio.dataset.wasPlaying = '0';
+      audio.volume = 1;
+      if (audio.paused) {
+        audio.play()
+          .then(() => setMusicOn(true))
+          .catch(() => {
+            // لو المتصفح كان لسه ماسك جلسة الفيديو → جرّب تاني كام مرة
+            audio.dataset.wasPlaying = '1';
+            if (resumeAttempts < 10) {
+              resumeAttempts += 1;
+              setTimeout(resumeMusic, 400);
+            } else {
+              audio.dataset.wasPlaying = '0';
+            }
+          });
+      } else {
+        setMusicOn(true);
+      }
     };
+
+    const onVideoStop = () => {
+      resumeAttempts = 0;
+      resumeMusic();
+    };
+
     window.addEventListener('birthday-video-start', onVideoStart);
     window.addEventListener('birthday-video-stop', onVideoStop);
     return () => {
