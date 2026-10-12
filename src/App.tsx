@@ -22,6 +22,11 @@ export default function App() {
   const [stage, setStage] = useState<Stage>('login');
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const musicOnRef = useRef(false);
+  const videoActiveRef = useRef(false);
+
+  // متابعة حالة الموسيقى في مرجع عشان نقدر نرد عليها من أي لمسة
+  useEffect(() => { musicOnRef.current = musicOn; }, [musicOn]);
 
   // تشغيل الأغنية (بتشتغل أول ما المستخدم يبدأ يكتب كلمة السر)
   const playMusic = useCallback(() => {
@@ -64,6 +69,7 @@ export default function App() {
       if (!audio) return;
       // سجّل إن الأغنية كانت شغالة عشان نرجّعها بعدين
       audio.dataset.wasPlaying = audio.paused ? '0' : '1';
+      videoActiveRef.current = true; // الفيديو شغال — نحافظ على الكتم
       if (!audio.paused) audio.volume = 0;
     };
 
@@ -93,15 +99,36 @@ export default function App() {
     };
 
     const onVideoStop = () => {
+      videoActiveRef.current = false; // الفيديو وقف — الأغنية تكمّل
       resumeAttempts = 0;
       resumeMusic();
     };
 
+    // 📲 أول ما المستخدم يلمس أي جزء في الشاشة (والموسيقى كانت شغالة لكن المتصفح وقفها)
+    // → الأغنية تكمّل لوحدها من نفس المكان من غير ما يدوس على زر الأغنية
+    const resumeOnTouch = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      if (!musicOnRef.current) return; // كانت مقفولة بإيده — منفتحهاش غصب
+      if (videoActiveRef.current) return; // الفيديو لسه شغال — نحافظ على الكتم
+      if (audio.paused) {
+        audio.volume = 1;
+        audio.play().then(() => setMusicOn(true)).catch(() => {});
+      } else if (audio.volume === 0) {
+        audio.volume = 1;
+        setMusicOn(true);
+      }
+    };
+
     window.addEventListener('birthday-video-start', onVideoStart);
     window.addEventListener('birthday-video-stop', onVideoStop);
+    window.addEventListener('pointerdown', resumeOnTouch);
+    window.addEventListener('touchstart', resumeOnTouch);
     return () => {
       window.removeEventListener('birthday-video-start', onVideoStart);
       window.removeEventListener('birthday-video-stop', onVideoStop);
+      window.removeEventListener('pointerdown', resumeOnTouch);
+      window.removeEventListener('touchstart', resumeOnTouch);
     };
   }, []);
 
