@@ -43,7 +43,7 @@ export default function EnvelopeModal({ onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(16, 185, 129, 0.10)', backdropFilter: 'blur(8px)' }}>
+      style={{ background: 'rgba(2, 12, 8, 0.72)', backdropFilter: 'blur(8px)' }}>
 
       <div className="relative w-full max-w-2xl animate-fade-in-scale">
         {!opened ? (
